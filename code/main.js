@@ -14,37 +14,44 @@ module.exports = class extends Extension {
             color: '#339900',
         });
 
-        // 循环添加模块
-        for( let strs_len=3 ; strs_len<=50 ; strs_len++ ){
-            const myopcode = `${category_id}.${strs_len}`;
-            const myMassageId_strs = [`connect ${strs_len} strings [s0]`];
+        // 创建一个不能被程序触发的积木，点击它就会直接跳转到github仓库地址。
+        api.addBlock({
+            opcode: `${ category_id }.jumptogithub`,
+            messageId: "Click here jump to github",
+            categoryId: category_id,
+            function: ()=>{
+                window.open( "https://github.com/bddjr/clipcc-extension-connect_more_strings_v2" );
+            },
+        });
+
+        // 循环创建积木
+        let onInit_myMassageId = '[s0][s1]';
+        let onInit_func_strs = "a=>`${a.s0}${a.s1}";
+        for( let strs_len=2 ; strs_len<50 ; strs_len++ ){
+            onInit_myMassageId += `[s${ strs_len }]`;
+            onInit_func_strs += `\${a.s${ strs_len }}`;
+
             const myparam = {
                 s0: {
                     type: type.ParameterType.STRING,
-                    default: " 0 ",
+                    default: "1",
                 }
             };
-            // 拼接字符串用的列表
-            const func_strs = ["a=>`${a.s0}"];
-            // 开始堆叠
-            for( let i=1 ; i < strs_len ; i++ ){
-                myMassageId_strs.push( `[s${i}]` );
+            for( let i=1 ; i<=strs_len ; i++ ){
                 myparam[ "s"+ i ] = {
                     type: type.ParameterType.STRING,
-                    default: ` ${i} `,
+                    default: `${ i+1 }`,
                 };
-                func_strs.push( `\${a.s${i}}` );
             }
-            func_strs.push( "`" );
 
             api.addBlock({
-                opcode: myopcode ,
-                type: type.BlockType.REPORTER ,
-                messageId: myMassageId_strs.join("") ,
-                categoryId: category_id ,
-                param: myparam ,
+                opcode: `${ category_id }.${ strs_len }`,
+                type: type.BlockType.REPORTER,
+                messageId: `Connect ${ strs_len +1 } strings ${ onInit_myMassageId }`,
+                categoryId: category_id,
+                param: myparam,
                 // 这是安全的
-                function: eval( func_strs.join("") ),
+                function: eval( onInit_func_strs + "`" ),
             });
         }
     }
