@@ -19,3 +19,12 @@ You can download it from Releases.
 ## Packaging method: 
 Compress the code folder into a zip file, and then run rename.bat .  
 If you have installed bandizip, you can use pakaging.bat .
+
+***
+## Pictures
+
+![装载后的封面.jpeg](./readme-pictures/装载后的封面.jpeg)
+
+![装载后的积木栏.jpeg](./readme-pictures/装载后的积木栏.jpeg)
+
+![积木运行效果.jpeg](./readme-pictures/积木运行效果.jpeg)
