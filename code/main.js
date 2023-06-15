@@ -26,7 +26,7 @@ module.exports = class extends Extension {
 
         // 循环创建积木
         let onInit_myMassageId = '[s0][s1]';
-        let onInit_func_strs = "a=>`${a.s0}${a.s1}";
+        let onInit_func_strs = "return`${a.s0}${a.s1}";
         for( let strs_len=2 ; strs_len<50 ; strs_len++ ){
             onInit_myMassageId += `[s${ strs_len }]`;
             onInit_func_strs += `\${a.s${ strs_len }}`;
@@ -51,7 +51,7 @@ module.exports = class extends Extension {
                 categoryId: category_id,
                 param: myparam,
                 // 这是安全的
-                function: eval( onInit_func_strs + "`" ),
+                function: new Function( "a", onInit_func_strs + "`" ),
             });
         }
     }
