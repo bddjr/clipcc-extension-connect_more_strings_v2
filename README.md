@@ -10,7 +10,8 @@
 You can download it from Releases.
 
 ## 打包方法：
-<https://github.com/bddjr/clipcc-extension_simple_template>  
+将 code 文件夹压缩为 zip 文件。  
+详见：<https://github.com/bddjr/clipcc-extension_simple_template>  
 
 ***
 ## Pictures
