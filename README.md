@@ -9,9 +9,13 @@
 
 You can download it from Releases.
 
+***
 ## 打包方法：
 将 code 文件夹压缩为 zip 文件。  
 详见：<https://github.com/bddjr/clipcc-extension_simple_template>  
+
+***
+该扩展（2.0.3）已自行修复再次加载作品导致积木重复的bug。bug详见：<https://github.com/bddjr/clipcc-extension_simple_template/issues/3>  
 
 ***
 ## Pictures

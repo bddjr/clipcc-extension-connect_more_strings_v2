@@ -2,9 +2,19 @@ const {api, type, Extension} = self["ClipCCExtension"];
 const extension_id = 'bddjr.connect_more_strings_v2';
 const category_id = extension_id + '.category';
 
+function my_onUninit(){
+    api.removeCategory( category_id );
+}
+
 module.exports = class extends Extension {
     onUninit(){
-        api.removeCategory( category_id );
+        my_onUninit();
+    }
+    beforeProjectLoadExtension(data, extensions){
+        // 修复再次加载作品导致积木重复的bug
+        // 实测不能使用 this.onUninit()
+        if( Object.keys( extensions ).includes( extension_id ) )
+            my_onUninit();
     }
 
     onInit(){
